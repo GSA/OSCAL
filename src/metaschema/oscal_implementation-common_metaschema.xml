@@ -386,6 +386,7 @@
                   <field ref="role-id" min-occurs="0" max-occurs="unbounded">
                         <group-as name="role-ids" in-json="ARRAY"/>
                   </field>
+                  <!-- TODO: deprecate use of 'authorized-privilege' in the user assembly.  Instead, add 'role-id' to 'authorized-privilege' assembly and apply to  -->
                   <assembly ref="authorized-privilege" max-occurs="unbounded">
                         <group-as name="authorized-privileges" in-json="ARRAY"/>
                   </assembly>
@@ -417,6 +418,11 @@
       <define-assembly name="authorized-privilege">
             <formal-name>Privilege</formal-name>
             <description>Identifies a specific system privilege held by the user, along with an associated description and/or rationale for the privilege.</description>
+            <define-flag name="uuid" as-type="uuid" required="yes">
+                  <formal-name>User Universally Unique Identifier</formal-name>
+                  <!-- Identifier Declaration -->
+                  <description>A <a href="https://pages.nist.gov/OSCAL/concepts/identifier-use/#machine-oriented">machine-oriented</a>, <a href="https://pages.nist.gov/OSCAL/concepts/identifier-use/#globally-unique">globally unique</a> identifier with <a href="https://pages.nist.gov/OSCAL/concepts/identifier-use/#cross-instance">cross-instance</a> scope that can be used to reference this user class elsewhere in <a href="https://pages.nist.gov/OSCAL/concepts/identifier-use/#scope">this or other OSCAL instances</a>. The locally defined <em>UUID</em> of the <code>authorized-privilege</code> can be used to reference the data item locally or globally (e.g., in an imported OSCAL instance). This UUID should be assigned <a href="https://pages.nist.gov/OSCAL/concepts/identifier-use/#consistency">per-subject</a>, which means it should be consistently used to identify the same subject across revisions of the document.</description>
+            </define-flag>
             <model>
                   <define-field name="title" as-type="markup-line" min-occurs="1">
             <formal-name>Privilege Title</formal-name>
@@ -429,7 +435,19 @@
                   <field ref="function-performed" min-occurs="1" max-occurs="unbounded">
                         <group-as name="functions-performed" in-json="ARRAY"/>
                   </field>
+
+                  <!-- Todo: will need to create contstraint such that referenced role-id must exist in the metadata -->
+                  <field ref="responsible-role" min-occurs="0" max-occurs="unbounded">
+                        <group-as name="responsible-roles" in-json="ARRAY"/>
+                  </field>
+                  
             </model>
+            <constraints>              
+                  <!-- References to role-id -->
+                  <index-has-key name="index-metadata-role-id" target="responsible-role/@role-id">
+                        <key-field target="@role-id"/>
+                  </index-has-key>
+            </constraints>
       </define-assembly>
       <define-field name="function-performed" as-type="string">
             <formal-name>Functions Performed</formal-name>
