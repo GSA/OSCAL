@@ -429,7 +429,19 @@
                   <field ref="function-performed" min-occurs="1" max-occurs="unbounded">
                         <group-as name="functions-performed" in-json="ARRAY"/>
                   </field>
+
+                  <!-- Todo: will need to create contstraint such that referenced role-id must exist in the metadata -->
+                  <field ref="responsible-role" min-occurs="0" max-occurs="unbounded">
+                        <group-as name="responsible-roles" in-json="ARRAY"/>
+                  </field>
+
             </model>
+            <constraints>              
+                  <!-- References to role-id -->
+                  <index-has-key name="index-metadata-role-id" target="responsible-role/@role-id">
+                        <key-field target="@role-id"/>
+                  </index-has-key>
+            </constraints>
       </define-assembly>
       <define-field name="function-performed" as-type="string">
             <formal-name>Functions Performed</formal-name>
