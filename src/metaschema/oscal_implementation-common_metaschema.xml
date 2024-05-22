@@ -388,7 +388,10 @@
                   </assembly>
                   <field ref="role-id" min-occurs="0" max-occurs="unbounded">
                         <group-as name="role-ids" in-json="ARRAY"/>
-                  </field>
+                  </field>                  
+                  <assembly ref="authorized-privilege" max-occurs="unbounded" deprecated="1.1.3">
+                        <group-as name="authorized-privileges" in-json="ARRAY"/>
+                  </assembly>
                   <field ref="remarks" in-xml="WITH_WRAPPER"/>
             </model>
             <constraint>
