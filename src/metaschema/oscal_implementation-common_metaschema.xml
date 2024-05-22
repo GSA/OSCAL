@@ -407,8 +407,12 @@
                         <enum value="no-logical-access">This role has no access to the system, such as a manager who approves access as part of a process.</enum>
                   </allowed-values>
                   <allowed-values target="role-id" allow-other="yes">
-            &allowed-values-responsible-roles-operations;
+                        &allowed-values-responsible-roles-operations;
                   </allowed-values>
+                  <!-- Index for users -->
+                  <index name="index-system-implementation-user-uuid" target=".">
+                        <key-field target="@uuid" />
+                  </index>
             </constraint>
             <remarks>
                   <p>Permissible values to be determined closer to the application, such as by a receiving authority.</p>
@@ -444,14 +448,11 @@
             </model>
             <constraint>
                   <!-- References to roles -->
-                  <index-has-key name="index-metadata-role-id" target="authorized-privilege/role-id">
-                        <key-field target="@id"/>
+                  <index-has-key name="index-metadata-role-id" target=".">
+                        <key-field target="role-id"/>
                   </index-has-key>
                   <!-- References to users -->
-                  <index name="index-system-implementation-user-uuid" target="system-implementation/user">
-                        <key-field target="@uuid" />
-                  </index>
-                  <index-has-key name="index-system-implementation-user-uuid" target="authorized-privilege/user-uuid">
+                  <index-has-key name="index-system-implementation-user-uuid" target=".">
                         <key-field target="@uuid"/>
                   </index-has-key>
                   <!-- TODO: Add combination constraint requiring authorized-privilege to reference at least one role-id or user-uuid -->
