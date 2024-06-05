@@ -226,6 +226,17 @@
                               <p>Since <code>responsible-role</code> associates multiple <code>party-uuid</code> entries with a single <code>role-id</code>, each role-id must be referenced only once.</p>
                         </remarks>
                   </is-unique>
+                  
+                  <!-- Constraint requiring authorized-privilege to reference at least one role-id or user-uuid -->
+                  <expect target="authorized-privilege" test="exits(role-id) or exists(user-uuid)" />
+                  <!-- role-id and user-uuid must be unique -->
+                  <is-unique id="unique-component-authorized-privilege-role-id" target="authorized-privilege">
+                        <key-field target="role-id" />
+                  </is-unique>  
+                  <is-unique id="unique-component-authorized-privilege-uuid" target="authorized-privilege">
+                        <key-field target="role-id" />
+                  </is-unique>  
+
             </constraint>
             <remarks>
                   <p>Components may be products, services, application programming interface (APIs), policies, processes, plans, guidance, standards, or other tangible items that enable security and/or privacy.</p>
@@ -389,7 +400,7 @@
                   <field ref="role-id" min-occurs="0" max-occurs="unbounded">
                         <group-as name="role-ids" in-json="ARRAY"/>
                   </field>                  
-                  <assembly ref="authorized-privilege" max-occurs="unbounded" deprecated="1.1.3">
+                  <assembly ref="authorized-privilege" max-occurs="unbounded">
                         <group-as name="authorized-privileges" in-json="ARRAY"/>
                   </assembly>
                   <field ref="remarks" in-xml="WITH_WRAPPER"/>
@@ -425,12 +436,6 @@
             <formal-name>Privilege</formal-name>
             <description>Identifies a specific system privilege held by the user, along with an associated description and/or rationale for the privilege.</description>
             <model>
-                  <!--  <json-key flag-name="uuid"/>  -->
-                  <define-flag name="uuid" as-type="uuid" required="yes">
-                        <formal-name>Privilege Universally Unique Identifier</formal-name>
-                        <!-- Identifier Declaration -->
-                        <description>A <a href="https://pages.nist.gov/OSCAL/concepts/identifier-use/#machine-oriented">machine-oriented</a>, <a href="https://pages.nist.gov/OSCAL/concepts/identifier-use/#globally-unique">globally unique</a> identifier with <a href="https://pages.nist.gov/OSCAL/concepts/identifier-use/#cross-instance">cross-instance</a> scope that can be used to reference this privilege elsewhere in <a href="https://pages.nist.gov/OSCAL/concepts/identifier-use/#scope">this or other OSCAL instances</a>. The locally defined <em>UUID</em> of the <code>authorized-privilege</code> can be used to reference the data item locally or globally (e.g., in an imported OSCAL instance). This UUID should be assigned <a href="https://pages.nist.gov/OSCAL/concepts/identifier-use/#consistency">per-subject</a>, which means it should be consistently used to identify the same subject across revisions of the document.</description>
-                  </define-flag>
                   <define-field name="title" as-type="markup-line" min-occurs="1">
                         <formal-name>Privilege Title</formal-name>
                         <description>A human readable name for the privilege.</description>
@@ -450,15 +455,18 @@
                   </field>
             </model>
             <constraint>
-                  <!-- References to roles -->
-                  <index-has-key name="index-metadata-role-id" target=".">
+                  
+                  <!-- Constraints for authorized-privileges (Separation of Duties)-->
+                  <!-- Roles Constraints -->
+                  <has-cardinality target="authorized-privilege/role-id" min-occurs="0" max-occurs="unbounded" />
+                  <index-has-key name="index-metadata-role-id" target="authorized-privilege">
                         <key-field target="role-id"/>
                   </index-has-key>
-                  <!-- References to users -->
-                  <index-has-key name="index-system-implementation-user-uuid" target=".">
-                        <key-field target="@uuid"/>
-                  </index-has-key>
-                  <!-- TODO: Add combination constraint requiring authorized-privilege to reference at least one role-id or user-uuid -->
+                  <!-- Users constraints -->
+                  <has-cardinality target="authorized-privilege/user-uuid" min-occurs="0" max-occurs="unbounded" />
+                  <index-has-key name="index-system-implementation-user-uuid" target="authorized-privilege">
+                        <key-field target="user-uuid"/>
+                  </index-has-key>                
             </constraint>
       </define-assembly>
       <define-field name="function-performed" as-type="string">
