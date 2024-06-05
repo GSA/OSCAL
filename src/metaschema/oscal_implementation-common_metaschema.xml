@@ -78,7 +78,7 @@
                   <assembly ref="responsible-role" max-occurs="unbounded">
                         <group-as name="responsible-roles" in-json="ARRAY"/>
                   </assembly>
-                  <assembly ref="authorized-privilege" max-occurs="unbounded">
+                  <assembly ref="authorized-privilege-v2" max-occurs="unbounded">
                         <group-as name="authorized-privileges" in-json="ARRAY"/>
                   </assembly>
                   <assembly ref="protocol" max-occurs="unbounded">
@@ -226,17 +226,6 @@
                               <p>Since <code>responsible-role</code> associates multiple <code>party-uuid</code> entries with a single <code>role-id</code>, each role-id must be referenced only once.</p>
                         </remarks>
                   </is-unique>
-                  
-                  <!-- Constraint requiring authorized-privilege to reference at least one role-id or user-uuid -->
-                  <expect target="authorized-privilege" test="exits(role-id) or exists(user-uuid)" />
-                  <!-- role-id and user-uuid must be unique -->
-                  <is-unique id="unique-component-authorized-privilege-role-id" target="authorized-privilege">
-                        <key-field target="role-id" />
-                  </is-unique>  
-                  <is-unique id="unique-component-authorized-privilege-uuid" target="authorized-privilege">
-                        <key-field target="role-id" />
-                  </is-unique>  
-
             </constraint>
             <remarks>
                   <p>Components may be products, services, application programming interface (APIs), policies, processes, plans, guidance, standards, or other tangible items that enable security and/or privacy.</p>
@@ -400,7 +389,7 @@
                   <field ref="role-id" min-occurs="0" max-occurs="unbounded">
                         <group-as name="role-ids" in-json="ARRAY"/>
                   </field>                  
-                  <assembly ref="authorized-privilege" max-occurs="unbounded">
+                  <assembly ref="authorized-privilege" max-occurs="unbounded" deprecated="1.2.0">
                         <group-as name="authorized-privileges" in-json="ARRAY"/>
                   </assembly>
                   <field ref="remarks" in-xml="WITH_WRAPPER"/>
@@ -447,28 +436,59 @@
                   <field ref="function-performed" min-occurs="1" max-occurs="unbounded">
                         <group-as name="functions-performed" in-json="ARRAY"/>
                   </field>
+            </model>
+            <constraint>
+                  <is-unique id="unique-authorized-privilege-function-performed" target=".">
+                        <key-field target="function-performed" />
+                  </is-unique>  
+            </constraint>
+      </define-assembly>
+      <define-assembly name="authorized-privilege-v2">
+            <formal-name>Privilege</formal-name>
+            <description>Identifies a specific system privilege held by the user, along with an associated description and/or rationale for the privilege.</description>
+            <use-name>authorized-privilege</use-name>
+            <model>
+                  <define-field name="title" as-type="markup-line" min-occurs="1">
+                        <formal-name>Privilege Title</formal-name>
+                        <description>A human readable name for the privilege.</description>
+                  </define-field>
+                  <define-field name="description" as-type="markup-multiline" in-xml="WITH_WRAPPER">
+                        <formal-name>Privilege Description</formal-name>
+                        <description>A summary of the privilege's purpose within the system.</description>
+                  </define-field>
                   <field ref="role-id" min-occurs="0" max-occurs="unbounded">
                         <group-as name="role-ids" in-json="ARRAY"/>
                   </field>
                   <field ref="user-uuid" min-occurs="0" max-occurs="unbounded">
                         <group-as name="user-uuids" in-json="ARRAY"/>
                   </field>
+                  <field ref="function-performed" min-occurs="1" max-occurs="unbounded">
+                        <group-as name="functions-performed" in-json="ARRAY"/>
+                  </field>
             </model>
             <constraint>
-                  
-                  <!-- Constraints for authorized-privileges (Separation of Duties)-->
-                  <!-- Roles Constraints -->
-                  <has-cardinality target="authorized-privilege/role-id" min-occurs="0" max-occurs="unbounded" />
-                  <index-has-key name="index-metadata-role-id" target="authorized-privilege">
+                  <index-has-key name="index-metadata-role-id" target=".">
                         <key-field target="role-id"/>
                   </index-has-key>
-                  <!-- Users constraints -->
-                  <has-cardinality target="authorized-privilege/user-uuid" min-occurs="0" max-occurs="unbounded" />
-                  <index-has-key name="index-system-implementation-user-uuid" target="authorized-privilege">
+                  <is-unique id="unique-authorized-privilege-role-id" target=".">
+                        <key-field target="role-id" />
+                  </is-unique>  
+                  <index-has-key name="index-system-implementation-user-uuid" target=".">
                         <key-field target="user-uuid"/>
                   </index-has-key>                
+                  <is-unique id="unique-authorized-privilege-user-uuid" target=".">
+                        <key-field target="user-uuid" />
+                  </is-unique>  
+                  <expect target="authorized-privilege" test="role-id or user-uuid">
+                        <!-- Constraint requiring authorized-privilege to reference at least one role-id or user-uuid -->
+                        <message>An authorized privilege must have at least one role-id or user-uuid.</message>
+                  </expect>
+                  <is-unique id="unique-authorized-privilege-v2-function-performed" target=".">
+                        <key-field target="function-performed" />
+                  </is-unique>  
             </constraint>
       </define-assembly>
+
       <define-field name="function-performed" as-type="string">
             <formal-name>Functions Performed</formal-name>
             <description>Describes a function performed for a given authorized privilege by this user class.</description>
