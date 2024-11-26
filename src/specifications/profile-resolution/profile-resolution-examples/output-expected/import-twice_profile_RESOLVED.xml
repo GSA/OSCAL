@@ -40,25 +40,4 @@
          <p>C3 ccccc cccccccccccccc.</p>
       </part>
    </control>
-   <control id="b1">
-      <title>Control B1</title>
-      <prop name="label" value="fourth"/>
-      <part name="statement" id="b1-stmt">
-         <p>B1 bbbb bbbbbbb.</p>
-      </part>
-   </control>
-   <control id="c1">
-      <title>Control C1</title>
-      <prop name="label" value="seventh"/>
-      <part name="statement" id="c1-stmt">
-         <p>C1 ccccc ccc ccccccccccccccccc.</p>
-      </part>
-   </control>
-   <control id="c3">
-      <title>Control C3</title>
-      <prop name="label" value="ninth"/>
-      <part name="statement" id="c3-stmt">
-         <p>C3 ccccc cccccccccccccc.</p>
-      </part>
-   </control>
 </catalog>

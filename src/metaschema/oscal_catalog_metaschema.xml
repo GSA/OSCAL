@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?xml-model href="../../build/metaschema-xslt/src/validate/metaschema-composition-check.sch" type="application/xml" schematypens="http://purl.oclc.org/dsdl/schematron"?>
 <!-- OSCAL CATALOG METASCHEMA -->
-<!-- validate with XSD and Schematron (linked) -->
 <!DOCTYPE METASCHEMA [
    <!ENTITY allowed-values-control-group-property-name SYSTEM "shared-constraints/allowed-values-control-group-property-name.ent">
 ]>
 <?xml-stylesheet type="text/css" href="metaschema-author.css"?>
-<METASCHEMA xmlns="http://csrc.nist.gov/ns/oscal/metaschema/1.0">
+<METASCHEMA xmlns="http://csrc.nist.gov/ns/oscal/metaschema/1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://csrc.nist.gov/ns/oscal/metaschema/1.0 https://raw.githubusercontent.com/metaschema-framework/metaschema/refs/heads/develop/schema/xml/metaschema.xsd">
       <schema-name>OSCAL Control Catalog Model</schema-name>
       <schema-version>1.1.2</schema-version>
       <short-name>oscal-catalog</short-name>
@@ -78,17 +76,7 @@
             </constraint>
             <remarks>
                   <p>Catalogs may use one or more <code>group</code> objects to subdivide the control contents of a catalog.</p>
-            </remarks>
-            <example>
-                  <description>A small catalog with a single control.</description>
-                  <catalog xmlns="http://csrc.nist.gov/ns/oscal/1.0" uuid="35566cd4-7331-43ba-b023-988c38d62673">
-                        <title>A Miniature Catalog</title>
-                        <control id="single">
-                              <title>A Single Control</title>
-                              <!-- TODO: this is not a complete valid example. Fix this. -->
-                        </control>
-                  </catalog>
-            </example>
+            </remarks>            
       </define-assembly>
       <define-assembly name="group">
             <formal-name>Control Group</formal-name>
@@ -153,15 +141,6 @@
                   <p>Catalogs can use the catalog <code>group</code> construct to organize related controls into a single grouping, such as a family of controls or other logical organizational structure.</p>
                   <p>A <code>group</code> may have its own properties, statements, parameters, and references, which are inherited by all controls of that are a member of the group.</p>
             </remarks>
-            <example>
-                  <group xmlns="http://csrc.nist.gov/ns/oscal/1.0" id="xyz">
-                        <title>My Group</title>
-                        <prop name="required" value="some value"/>
-                        <control id="xyz1">
-                              <title>Control</title>
-                        </control>
-                  </group>
-            </example>
       </define-assembly>
       <define-assembly name="control">
             <formal-name>Control</formal-name>
@@ -312,10 +291,5 @@
                   <p>Each security or privacy control within the catalog is defined by a distinct control instance. Controls may be as complex or as simple as a catalog defines them. They may be decomposed or further specified into child <code>control</code> objects, for example to represent control enhancements or specific breakouts of control functionality, to be maintained as discrete requirements. Controls may also contain structured parts (using <code>part</code>) and they may be grouped together in families or classes with <code>group</code>.</p>
                   <p>Control structures in OSCAL will also exhibit regularities and rules that are not codified in OSCAL but in its applications or domains of application. For example, for catalogs describing controls as defined by NIST SP 800-53, a control must have a part with the name "statement", which represents the textual narrative of the control. This "statement" part must occur only once, but may have nested parts to allow for multiple paragraphs or sections of text. This organization supports addressability of this data content as long as, and only insofar as, it is consistently implemented across the control set. As given with these model definitions, constraints defined and assigned here can aid in ensuring this regularity; but other such constraints and other useful patterns of use remain to be discovered and described.</p>
             </remarks>
-            <example>
-                  <control xmlns="http://csrc.nist.gov/ns/oscal/1.0" id="x">
-                        <title>Control 1</title>
-                  </control>
-            </example>
       </define-assembly>
 </METASCHEMA>

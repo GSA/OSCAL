@@ -4,7 +4,7 @@
 <catalog xmlns="http://csrc.nist.gov/ns/oscal/1.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          uuid="6498eb6e-8653-4470-8b97-54054d3ba886"
-         xsi:schemaLocation="http://csrc.nist.gov/ns/oscal/1.0 ../../../../../xml/schema/oscal_catalog_schema.xsd">
+         xsi:schemaLocation="http://csrc.nist.gov/ns/oscal/1.0 ../../../../../build/generated/oscal_catalog_schema.xsd">
    <metadata>
       <title>ABC Catalog</title>
       <last-modified>2020-05-30T14:51:38.311-04:00</last-modified>
@@ -122,17 +122,26 @@
    </group>
    <back-matter>
       <resource uuid="4a3990e7-2020-4b8f-902c-d679ebea2b58">
+         <title>
+            a citation
+         </title>
          <citation>
             <text>A citation to an out of line document.</text>
          </citation>
       </resource>
       <resource uuid="ef4c1cf0-a3cc-4354-bdd5-690466f61d4f">
-         <citation>
+            <title>
+               citation
+            </title>
+                  <citation>
             <text>A citation to an out of line document.</text>
          </citation>
       </resource>
       <resource uuid="70830fd9-7899-40f8-acfe-70a5d1a56353">
-      	 <prop name="keep" value="always"/>
+         <title>
+            citation
+         </title>
+         <prop ns="https://external.gov" name="keep" value="always"/>
          <citation>
             <text>A citation to an out of line document.</text>
          </citation>

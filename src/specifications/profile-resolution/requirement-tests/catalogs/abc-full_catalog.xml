@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?xml-model href="../../example-checkup.sch" type="application/xml" schematypens="http://purl.oclc.org/dsdl/schematron"?>
-<!-- Modified by conversion XSLT 2021-04-05T14:13:38.826-04:00 - RC2 OSCAL becomes RC3 OSCAL -->
 <catalog xmlns="http://csrc.nist.gov/ns/oscal/1.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          uuid="6498eb6e-8653-4470-8b97-54054d3ba886"
@@ -107,13 +106,13 @@
          <control id="c3.a">
             <title>Control C3-A</title>
             <prop name="label" value="10th"/>
-            <part name="statement" id="c3-stmt">
+            <part name="statement" id="c3-a-stmt">
                <p>C3 A ccccc cccccccccccccc.</p>
             </part>
             <control id="c3.a-1">
                <title>Control C3-A-1</title>
                <prop name="label" value="11th"/>
-               <part name="statement" id="c3-stmt">
+               <part name="statement" id="c3-a-1-stmt">
                   <p>C3 A-1 ccccc cccccccccccccc.</p>
                </part>
             </control>
@@ -122,17 +121,19 @@
    </group>
    <back-matter>
       <resource uuid="4a3990e7-2020-4b8f-902c-d679ebea2b58">
+         <title>Resource 1</title>
          <citation>
             <text>A citation to an out of line document.</text>
          </citation>
       </resource>
       <resource uuid="ef4c1cf0-a3cc-4354-bdd5-690466f61d4f">
+         <title>Resource 2</title>
          <citation>
             <text>A citation to an out of line document.</text>
          </citation>
       </resource>
       <resource uuid="70830fd9-7899-40f8-acfe-70a5d1a56353">
-      	 <prop name="keep" value="always"/>
+         <title>Resource 3</title>
          <citation>
             <text>A citation to an out of line document.</text>
          </citation>

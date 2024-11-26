@@ -114,13 +114,13 @@
          <control id="c3.a">
             <title>Control C3-A</title>
             <prop name="label" value="10th"/>
-            <part name="statement" id="c3-stmt">
+            <part name="statement" id="c3-stmt.a">
                <p>C3 A ccccc cccccccccccccc.</p>
             </part>
             <control id="c3.a-1">
                <title>Control C3-A-1</title>
                <prop name="label" value="11th"/>
-               <part name="statement" id="c3-stmt">
+               <part name="statement" id="c3-stmt.a-1">
                   <p>C3 A-1 ccccc cccccccccccccc.</p>
                </part>
             </control>
@@ -130,17 +130,26 @@
    </group>
    <back-matter>
       <resource uuid="4a3990e7-2020-4b8f-902c-d679ebea2b58">
+         <title>
+         A Citeation   
+         </title>
          <citation>
             <text>A citation to an out of line document.</text>
          </citation>
       </resource>
       <resource uuid="ef4c1cf0-a3cc-4354-bdd5-690466f61d4f">
+         <title>
+            Citation
+         </title>
          <citation>
             <text>A citation to an out of line document.</text>
          </citation>
       </resource>
       <resource uuid="70830fd9-7899-40f8-acfe-70a5d1a56353">
-      	<prop name="keep" value="always"/>
+<title>
+   citation
+</title>
+         <prop ns="http://external.gov" name="keep" value="always"/>
          <citation>
             <text>A citation to an out of line document.</text>
          </citation>

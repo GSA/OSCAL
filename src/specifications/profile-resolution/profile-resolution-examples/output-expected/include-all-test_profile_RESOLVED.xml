@@ -120,17 +120,20 @@
     </group>
    <back-matter>
       <resource uuid="4a3990e7-2020-4b8f-902c-d679ebea2b58">
+		<title>citation</title>
          <citation>
             <text>A citation to an out of line document.</text>
          </citation>
       </resource>
       <resource uuid="ef4c1cf0-a3cc-4354-bdd5-690466f61d4f">
+		<title>citation</title>
          <citation>
             <text>A citation to an out of line document.</text>
          </citation>
       </resource>
       <resource uuid="70830fd9-7899-40f8-acfe-70a5d1a56353">
-      	 <prop name="keep" value="always"/>
+		<title>citation</title>
+      	 <prop ns="http://external" name="keep" value="always"/>
          <citation>
             <text>A citation to an out of line document.</text>
          </citation>

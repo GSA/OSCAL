@@ -32,9 +32,9 @@
             <prop name="conformity"
                   ns="https://fedramp.gov/ns/oscal"
                   value="assessment-objective"/>
-            <prop name="method" class="fedramp" value="EXAMINE"/>
+            <prop ns="https://fedramp.gov/ns/oscal" name="method" class="fedramp" value="EXAMINE"/>
             <p>A1 aaaaa <insert type="param" id-ref="a1_prm1"/> aaaaaaaaaa</p>
-            <part name="statement" id="new-part2">
+            <part name="objective" id="new-part2">
 	           <p>A1 ccc <insert type="param" id-ref="new_prm"/> ccc</p>
 	        </part>
          </part>

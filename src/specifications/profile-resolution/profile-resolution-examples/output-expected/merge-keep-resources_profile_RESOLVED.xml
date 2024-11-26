@@ -37,19 +37,21 @@
    </control>
    <back-matter>
       <resource uuid="4a3990e7-2020-4b8f-902c-d679ebea2b58">
+         <title>citation</title>
          <citation>
             <text>A citation to an out of line document.</text>
          </citation>
       </resource>
       <resource uuid="70830fd9-7899-40f8-acfe-70a5d1a56353">
-      	 <prop name="keep" value="always"/>
+         <title>citation</title>
+      	 <prop ns="https://external" name="keep" value="always"/>
          <citation>
             <text>A citation to an out of line document.</text>
          </citation>
       </resource>
       <resource uuid="761205f0-fd61-42d3-9c66-2fb89e844a19">
          <title>Risk Management Framework for Information Systems and Organizations: A System Life Cycle Approach for Security and Privacy</title>
-         <prop name="keep" value="always"/>
+         <prop ns="https://external" name="keep" value="always"/>
          <document-id scheme="https://www.doi.org/">...doi...</document-id>
          <rlink href="https://csrc.nist.gov/publications/detail/sp/800-37/rev-2/final"/>
       </resource>

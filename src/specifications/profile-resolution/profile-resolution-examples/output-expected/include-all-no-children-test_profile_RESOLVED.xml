@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<catalog xmlns="http://csrc.nist.gov/ns/oscal/1.0"
-         uuid="d6d77a7a-b17e-4e93-84a8-412c793b1f41">
+<catalog xmlns="http://csrc.nist.gov/ns/oscal/1.0" uuid="d6d77a7a-b17e-4e93-84a8-412c793b1f41">
    <metadata>
       <title>Test Profile</title>
       <last-modified>2021-04-06T15:00:51.584-04:00</last-modified>
@@ -29,8 +28,10 @@
       <prop name="label" value="1st"/>
       <part name="statement" id="a1-stmt">
          <p>A1 aaaaa aaaaaaaaaa</p>
-         <p>Parameter A.a is set: <insert type="param" id-ref="param-A.a"/></p>
-         <p>Parameter a1.a is set: <insert type="param" id-ref="param-a1.a"/></p>
+         <p>Parameter A.a is set: <insert type="param" id-ref="param-A.a"/>
+         </p>
+         <p>Parameter a1.a is set: <insert type="param" id-ref="param-a1.a"/>
+         </p>
       </part>
    </control>
    <control id="a2">
@@ -62,7 +63,8 @@
       <link rel="citation" href="#4a3990e7-2020-4b8f-902c-d679ebea2b58"/>
       <part name="statement" id="b2-stmt">
          <p>B2 bbb bbbbbbbbbbb bbbbbbbbbbbb.</p>
-         <p>Also, we <a href="#4a3990e7-2020-4b8f-902c-d679ebea2b58">refer to a citation</a>.</p>
+         <p>Also, we <a href="#4a3990e7-2020-4b8f-902c-d679ebea2b58">refer to a citation</a>.
+         </p>
       </part>
    </control>
    <control id="b3">
@@ -77,7 +79,8 @@
       <prop name="label" value="7th"/>
       <part name="statement" id="c1-stmt">
          <p>C1 ccccc ccc ccccccccccccccccc.</p>
-         <p>We cite a document with an anchor: <a href="somedoc#citation">... citation ...</a>.</p>
+         <p>We cite a document with an anchor: <a href="somedoc#citation">... citation ...</a>.
+         </p>
       </part>
    </control>
    <control id="c2">
@@ -111,17 +114,26 @@
    </control>
    <back-matter>
       <resource uuid="4a3990e7-2020-4b8f-902c-d679ebea2b58">
+         <title>
+citation   
+         </title>
          <citation>
             <text>A citation to an out of line document.</text>
          </citation>
       </resource>
       <resource uuid="ef4c1cf0-a3cc-4354-bdd5-690466f61d4f">
+         <title>
+            citation   
+         </title>
          <citation>
             <text>A citation to an out of line document.</text>
          </citation>
       </resource>
       <resource uuid="70830fd9-7899-40f8-acfe-70a5d1a56353">
-      	 <prop name="keep" value="always"/>
+         <title>
+            citation   
+         </title>
+         <prop ns="https://external" name="keep" value="always"/>
          <citation>
             <text>A citation to an out of line document.</text>
          </citation>

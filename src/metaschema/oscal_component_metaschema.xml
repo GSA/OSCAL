@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?xml-model href="../../build/metaschema-xslt/src/validate/metaschema-composition-check.sch" type="application/xml" schematypens="http://purl.oclc.org/dsdl/schematron"?>
 <!DOCTYPE METASCHEMA [
   <!ENTITY allowed-values-responsible-roles-operations SYSTEM "./shared-constraints/allowed-values-responsible-roles-operations.ent">
   <!ENTITY allowed-values-responsible-roles-component-production SYSTEM "./shared-constraints/allowed-values-responsible-roles-component-production.ent">
@@ -12,7 +11,7 @@
   <!ENTITY allowed-values-component-type SYSTEM "./shared-constraints/allowed-values-component-type.ent">
 ]>
 <METASCHEMA xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xmlns="http://csrc.nist.gov/ns/oscal/metaschema/1.0" xsi:schemaLocation="http://csrc.nist.gov/ns/oscal/metaschema/1.0 ../../build/metaschema-xslt/support/metaschema/schema/xml/metaschema.xsd">
+  xmlns="http://csrc.nist.gov/ns/oscal/metaschema/1.0" xsi:schemaLocation="http://csrc.nist.gov/ns/oscal/metaschema/1.0 https://raw.githubusercontent.com/metaschema-framework/metaschema/refs/heads/develop/schema/xml/metaschema.xsd">
   <schema-name>OSCAL Component Definition Model</schema-name>
   <schema-version>1.1.2</schema-version>
   <short-name>oscal-component-definition</short-name>
@@ -231,8 +230,6 @@
       <allowed-values target="(.)[@type='service']/link/@rel" allow-other="yes">
             &allowed-values-component_component_service;
       </allowed-values>
-
-      <expect target="." test="not(exists((.)[not(@type='service')]/protocol))"/>
 
       <!-- ========================================================================================================== -->
       <!-- = TODO: Consider whether INTERCONNECTION constraints are appropriate here.      = -->

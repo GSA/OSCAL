@@ -50,7 +50,8 @@
    </control>
    <back-matter>
       <resource uuid="70830fd9-7899-40f8-acfe-70a5d1a56353">
-      	 <prop name="keep" value="always"/>
+         <title>citation</title>
+      	 <prop ns="http://external" name="keep" value="always"/>
          <citation>
             <text>A citation to an out of line document.</text>
          </citation>

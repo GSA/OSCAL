@@ -26,21 +26,4 @@
          <p>B1 bbbb bbbbbbb.</p>
       </part>
    </control>
-   <control id="a1">
-      <title>Control A1</title>
-      <param id="a1_prm1">
-         <label>A1 Parameter 1</label>
-      </param>
-      <prop name="label" value="first"/>
-      <part name="statement" id="a1-stmt">
-         <p>A1 aaaaa <insert type="param" id-ref="a1_prm1"/> aaaaaaaaaa</p>
-      </part>
-   </control>
-   <control id="b1">
-      <title>Control B1</title>
-      <prop name="label" value="fourth"/>
-      <part name="statement" id="b1-stmt">
-         <p>B1 bbbb bbbbbbb.</p>
-      </part>
-   </control>
 </catalog>
