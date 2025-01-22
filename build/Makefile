@@ -1,5 +1,7 @@
 SHELL:=/usr/bin/env bash
 
+# Default OSCAL CLI URL
+OSCAL_CLI_URL ?= https://repo1.maven.org/maven2/dev/metaschema/oscal/oscal-cli-enhanced/2.4.0/oscal-cli-enhanced-2.4.0-oscal-cli.zip
 .PHONY: help
 # Run "make" or "make help" to get a list of user targets
 # Adapted from https://marmelab.com/blog/2016/02/29/auto-documented-makefile.html
@@ -24,6 +26,19 @@ dependencies: node_modules ## Ensure dependencies have been installed
 
 node_modules: package.json package-lock.json
 	npm ci
+
+.PHONY: test
+test: 
+	npm run test
+
+.PHONY: configure
+configure: 
+	npm install
+	wget $(OSCAL_CLI_URL)
+	unzip -o *-oscal-cli.zip -d node_modules/.bin/oscal-cli-enhanced
+	rm *-oscal-cli.zip
+	ln -sf oscal-cli-enhanced/bin/oscal-cli node_modules/.bin/oscal-cli
+	chmod +x node_modules/.bin/oscal-cli-enhanced/bin/oscal-cli
 
 .PHONY: clean
 clean: clean-schemas clean-linkcheck clean-converters clean-archives clean-resolved-metaschemas ## Remove all generated content
@@ -153,7 +168,7 @@ $(LINKCHECK_OUTPUT): node_modules $(LINKCHECK_CONFIG)
 	@mkdir -p $(GENERATED_DIR)
 	@echo Checking Markdown links...
 	cd ..; git ls-files -z "*.md" | \
-		xargs -0 npx --prefix build/ markdown-link-check -c build/$(LINKCHECK_CONFIG) | \
+		xargs -0n1 npx --prefix build/ markdown-link-check -c build/$(LINKCHECK_CONFIG) | \
 		tee build/$(LINKCHECK_OUTPUT); \
 	exit $${PIPESTATUS[1]}
 
